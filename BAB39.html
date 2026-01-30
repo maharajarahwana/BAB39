@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BAB39</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BAB1</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Latihan Kosakata</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .card {
+    background: white;
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  input {
+    width: 90%;
+    padding: 8px;
+    margin-top: 15px;
+  }
+  button {
+    margin-top: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+  }
+  .result {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .wrong { color: red; }
+  .correct { color: green; }
+  ol { text-align:left; max-height:400px; overflow:auto; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2 id="question"></h2>
+  <input type="text" id="answerInput" placeholder="Tulis jawaban di sini">
+  <br>
+  <button id="nextBtn">Selanjutnya</button>
+</div>
+
+<script>
+let questions = [
+{ soal: "금속 가공", jawaban: "pemrosesan logam" },
+{ soal: "용접봉", jawaban: "batang las" },
+{ soal: "-(으)라고 하다", jawaban: "menyuruh untuk" },
+{ soal: "가스 용접기", jawaban: "mesin las gas" },
+{ soal: "-기 전에", jawaban: "sebelum" },
+{ soal: "전기 용접기", jawaban: "mesin las listrik" },
+{ soal: "작업용 공구", jawaban: "alat untuk bekerja" },
+{ soal: "불꽃을 조절하다", jawaban: "mengatur api las" },
+{ soal: "공구 종류", jawaban: "jenis alat" },
+{ soal: "불꽃이 튀다", jawaban: "memercik api / menyambar" },
+{ soal: "정", jawaban: "pahat" },
+{ soal: "두께", jawaban: "ketebalan" },
+{ soal: "망치", jawaban: "palu" },
+{ soal: "불꽃이 세다", jawaban: "api kuat" },
+{ soal: "전기 드릴", jawaban: "bor listrik" },
+{ soal: "불꽃이 약하다", jawaban: "api lemah" },
+{ soal: "쇠톱", jawaban: "gergaji besi" },
+{ soal: "속도가 빠르다 / 느리다", jawaban: "kecepatan cepat / lambat" },
+{ soal: "리머", jawaban: "penggiling" },
+{ soal: "가스가 새다", jawaban: "gas bocor" },
+{ soal: "금긋기 바늘", jawaban: "jarum untuk membuat garis" },
+{ soal: "준비하다", jawaban: "mempersiapkan" },
+{ soal: "바이스", jawaban: "alat penjepit (ragum)" },
+{ soal: "소화기", jawaban: "alat pemadam api (APAR)" },
+{ soal: "공구 사용법", jawaban: "cara penggunaan alat" },
+{ soal: "조절기", jawaban: "pengatur" },
+{ soal: "못을 박다", jawaban: "memakukan" },
+{ soal: "그게 정말이에요?", jawaban: "apakah itu benar?" },
+{ soal: "구멍을 뚫다", jawaban: "membuat lubang" },
+{ soal: "속도로", jawaban: "dengan kecepatan" },
+{ soal: "파이프를 자르다", jawaban: "memotong pipa" },
+{ soal: "원반", jawaban: "cakram (disk)" },
+{ soal: "금속을 깎다", jawaban: "memotong logam" },
+{ soal: "형태", jawaban: "bentuk" },
+{ soal: "돌을 쪼다", jawaban: "memecah batu" },
+{ soal: "표면", jawaban: "permukaan" },
+{ soal: "구멍을 다듬다", jawaban: "membuat lubang lebih rapi" },
+{ soal: "매끄럽다", jawaban: "halus" },
+{ soal: "금을 긋다", jawaban: "membuat garis" },
+{ soal: "상해", jawaban: "cedera" },
+{ soal: "물체를 고정하다", jawaban: "membuat benda agar tetap" },
+{ soal: "전원", jawaban: "daya" },
+{ soal: "신고", jawaban: "melaporkan" },
+{ soal: "스위치", jawaban: "saklar" },
+{ soal: "꺼지다", jawaban: "mati (off)" },
+{ soal: "교체하다", jawaban: "mengganti" },
+{ soal: "남다", jawaban: "tersisa" },
+{ soal: "보안경", jawaban: "kacamata pelindung" },
+{ soal: "방진 마스크", jawaban: "masker debu" },
+{ soal: "절단", jawaban: "pemotongan" },
+{ soal: "안전커버", jawaban: "penutup pelindung" },
+{ soal: "절단하다", jawaban: "memotong" },
+{ soal: "화재", jawaban: "kebakaran" },
+{ soal: "판금 가위", jawaban: "gunting logam" },
+{ soal: "절단기", jawaban: "mesin pemotong" },
+{ soal: "비치하다", jawaban: "menyediakan" },
+{ soal: "전기 절단기", jawaban: "mesin pemotong listrik" },
+{ soal: "과분하다", jawaban: "berlebihan" },
+{ soal: "굵다", jawaban: "tebal" },
+{ soal: "솟구치다", jawaban: "terpental" },
+{ soal: "가늘다", jawaban: "tipis" },
+{ soal: "튕겨지다", jawaban: "memantul" },
+{ soal: "두껍다", jawaban: "tebal" },
+{ soal: "킥백 현상", jawaban: "fenomena kickback" },
+{ soal: "얇다", jawaban: "tipis" },
+{ soal: "향하다", jawaban: "mengarah" },
+{ soal: "용접", jawaban: "pengelasan" },
+{ soal: "익히다", jawaban: "memasak" },
+{ soal: "용접하다", jawaban: "mengelas" },
+{ soal: "위험", jawaban: "bahaya" },
+{ soal: "토치", jawaban: "obor" }
+];
+
+// Acak soal
+questions = questions.sort(() => Math.random() - 0.5);
+
+let index = 0;
+let score = 0;
+let userAnswers = [];
+
+const questionEl = document.getElementById("question");
+const answerInput = document.getElementById("answerInput");
+const nextBtn = document.getElementById("nextBtn");
+const card = document.querySelector(".card");
+
+function showQuestion() {
+  questionEl.textContent = "Soal " + (index + 1) + ": " + questions[index].soal;
+  answerInput.value = "";
+  answerInput.focus();
+}
+
+nextBtn.addEventListener("click", () => {
+  const userAnswer = answerInput.value.trim().toLowerCase();
+  userAnswers[index] = userAnswer; // simpan jawaban sesuai index
+
+  if (userAnswer === questions[index].jawaban) {
+    score++;
+  }
+
+  index++;
+  if (index < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  let answerList = "";
+  questions.forEach((q, i) => {
+    if (userAnswers[i] === q.jawaban) {
+      answerList += `<li>${q.soal} = <span class="correct">${q.jawaban}</span></li>`;
+    } else {
+      answerList += `<li>${q.soal} = <span class="correct">${q.jawaban}</span><br>
+                     Jawaban kamu: <span class="wrong">${userAnswers[i] || "(kosong)"}</span></li>`;
+    }
+  });
+
+  card.innerHTML = `
+    <h2>Hasil</h2>
+    <p class="result">Nilai: ${score} / ${questions.length}</p>
+    <hr>
+    <p>Kunci Jawaban:</p>
+    <ol>${answerList}</ol>
+  `;
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
